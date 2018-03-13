@@ -3,7 +3,7 @@ package com.intuit.sambokar.scenarios
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-object PostUser {
+object PostImage {
 
   /*val postUserHttp = http("post image")
     .post("/uploadFile")
@@ -11,7 +11,7 @@ object PostUser {
     //.saveAs("fileUrl"))
     .check(status is 201)*/
 
-  val postUser = scenario("post image")
+  val postImage = scenario("post image")
     .exec(http("post image")
       .post("/uploadFile")
       .bodyPart(RawFileBodyPart("file", "homer.jpg")

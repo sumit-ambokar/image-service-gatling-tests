@@ -4,7 +4,7 @@ import com.intuit.sambokar.util._
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
-import com.intuit.sambokar.scenarios.{GetImage, PostUser}
+import com.intuit.sambokar.scenarios.{GetImage, PostImage}
 
 class ImageServiceSimulation extends Simulation {
 
@@ -25,7 +25,7 @@ class ImageServiceSimulation extends Simulation {
       //heavisideUsers(1000) over(20 seconds) // 10
     ),
 
-    PostUser.postUser.inject(atOnceUsers(Environment.users.toInt))
+    PostImage.postImage.inject(atOnceUsers(Environment.users.toInt))
       .throttle(reachRps(1) in (20 seconds), holdFor(30 seconds))
   )
 
