@@ -11,10 +11,12 @@ object GetImage {
     .check(status.is(200))
 
   val getImage = scenario("get image")
-     .exec(http("get all image names")
-       .get("/getAllFileNames"))
-      .feed(jsonUrlFeeder)
-     .exec(
-       getImageHttp
-     )
+      .forever() {
+        exec(http("get all image names")
+          .get("/getAllFileNames"))
+          .feed(jsonUrlFeeder)
+          .exec(
+            getImageHttp
+          )
+      }
 }
