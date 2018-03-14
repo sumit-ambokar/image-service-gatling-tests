@@ -27,13 +27,16 @@ class ImageServiceSimulation extends Simulation {
 
     PostImage.postImage.inject(atOnceUsers(Environment.users.toInt))
       .throttle(reachRps(1) in (20 seconds), holdFor(30 seconds))
+
   )
 
   setUp(imageServiceScenarios)
     .protocols(httpConf)
     .maxDuration(1 minutes)
     .assertions(
-      global.responseTime.max.lessThan(Environment.maxResponseTime.toInt)
+      global.responseTime.max.lessThan(Environment.maxResponseTime.toInt),
+      global.successfulRequests.percent.greaterThan(95),
+      global.responseTime.percentile3.lessThan(2000)
     )
 
     /*
