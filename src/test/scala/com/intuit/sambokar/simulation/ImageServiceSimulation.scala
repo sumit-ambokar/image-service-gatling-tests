@@ -14,18 +14,18 @@ class ImageServiceSimulation extends Simulation {
   val imageServiceScenarios = List(
 
     GetImage.getImage.inject(
-      atOnceUsers(1),
+      atOnceUsers(Environment.usersStressTest.toInt),
       //rampUsers(100) over(1 seconds),
       //constantUsersPerSec(1000) during(15 seconds)
-      rampUsersPerSec(1) to 10 during(30 seconds) // 6
+      //rampUsersPerSec(1) to 10 during(30 seconds) // 6
       //rampUsersPerSec(10) to 20 during(10 minutes) randomized, // 7
       //splitUsers(1000) into(rampUsers(10) over(10 seconds)) separatedBy(10 seconds), // 8
       //splitUsers(1000) into(rampUsers(10) over(10 seconds)) separatedBy atOnceUsers(30), // 9
       //heavisideUsers(1000) over(20 seconds) // 10
     ),
 
-    PostImage.postImage.inject(atOnceUsers(Environment.users.toInt))
-      .throttle(reachRps(1) in (20 seconds), holdFor(30 seconds))
+    PostImage.postImage.inject(atOnceUsers(Environment.usersStressTest.toInt))
+      //.throttle(reachRps(10) in (20 seconds), holdFor(30 seconds))
 
   )
 

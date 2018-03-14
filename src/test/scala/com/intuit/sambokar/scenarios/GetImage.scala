@@ -19,4 +19,14 @@ object GetImage {
             getImageHttp
           )
       }
+
+
+  val getLargeImage = scenario("get large image")
+    .forever() {
+      exec(http("get large image")
+        .get("/getFile?fileName=mickeyBig.jpg")
+        .header(HttpHeaderNames.Accept, HttpHeaderValues.ImageJpeg)
+        .check(status.is(200))
+        )
+    }
 }
