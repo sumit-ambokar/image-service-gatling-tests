@@ -1,0 +1,13 @@
+# Docker compose file for user service
+version: '2.1'
+services:
+    image-service:
+      container_name: image-service
+      image: 481025982398.dkr.ecr.us-west-2.amazonaws.com/image-service:latest
+      ports:
+        - 9080:8080
+      volumes:
+        - $HOME/tmp:/tmp
+      environment:
+        - ACCESS_KEY=${ACCESS_KEY}
+        - SECRET_KEY=${SECRET_KEY}
