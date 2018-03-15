@@ -28,4 +28,16 @@ object PostImage {
           .check(regex("Successfully deleted"))
           .check(status is 200))
       }
+
+
+  val postImageNoDelete = scenario("post image no delete")
+    .forever() {
+      exec(http("Post image")
+        .post("/uploadFile")
+        .bodyPart(RawFileBodyPart("file", "homer.jpg")
+          .fileName("homer.jpg")
+          .transferEncoding("binary")).asMultipartForm
+        .check(regex(".*").saveAs("fileUrl"))
+        .check(status is 200))
+    }
 }
